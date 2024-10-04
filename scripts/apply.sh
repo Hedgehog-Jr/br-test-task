@@ -2,5 +2,4 @@
 
 terraform init
 terraform apply \
-  -auto-approve \
-  -var-file=common.tfvars
+  -auto-approve
