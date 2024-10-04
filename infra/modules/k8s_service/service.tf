@@ -12,6 +12,15 @@ resource "kubernetes_deployment" "this" {
       }
     }
 
+    strategy {
+      type = "RollingUpdate"
+      rolling_update {
+        max_unavailable = var.strategy_max_unavailable
+        max_surge       = var.strategy_max_surge
+      }
+    }
+
+
     template {
       metadata {
         labels = {
@@ -23,6 +32,7 @@ resource "kubernetes_deployment" "this" {
         container {
           name  = var.app_name
           image = var.docker_image
+
           port {
             container_port = var.service_target_port
           }

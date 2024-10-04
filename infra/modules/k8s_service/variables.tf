@@ -22,6 +22,18 @@ variable "service_port_protocol" {
   default     = "TCP"
 }
 
+variable "strategy_max_unavailable" {
+  type        = string
+  description = "The maximum number of pods that can be unavailable during the update"
+  default     = "0"
+}
+
+variable "strategy_max_surge" {
+  type        = string
+  description = "The maximum number of pods that can be scheduled above the desired number of pods"
+  default     = "1"
+}
+
 variable "service_port_type" {
   type        = string
   description = "Service port type"
