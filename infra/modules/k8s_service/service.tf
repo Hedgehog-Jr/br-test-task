@@ -36,6 +36,26 @@ resource "kubernetes_deployment" "this" {
           port {
             container_port = var.service_target_port
           }
+
+          liveness_probe {
+            http_get {
+              path = "/health"
+              port = var.service_target_port
+            }
+
+            initial_delay_seconds = var.liveness_probe_init_delay_sec
+            period_seconds        = var.liveness_probe_period_sec
+          }
+
+          readiness_probe {
+            http_get {
+              path = "/ready"
+              port = var.service_target_port
+            }
+            initial_delay_seconds = var.readiness_probe_init_delay_sec
+            period_seconds        = var.readiness_probe_period_sec
+            failure_threshold     = var.readiness_failure_threshold
+          }
         }
       }
     }

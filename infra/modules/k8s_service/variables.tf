@@ -34,6 +34,36 @@ variable "strategy_max_surge" {
   default     = "1"
 }
 
+variable "liveness_probe_init_delay_sec" {
+  type        = number
+  description = "The number of seconds to wait after the container has started before the liveness probe is initiated"
+  default     = 30
+}
+
+variable "liveness_probe_period_sec" {
+  type        = number
+  description = "The frequency in seconds with which the liveness probe is executed"
+  default     = 10
+}
+
+variable "readiness_probe_init_delay_sec" {
+  type        = number
+  description = "The number of seconds to wait after the container has started before the readiness probe is initiated for the first time"
+  default     = 5
+}
+
+variable "readiness_probe_period_sec" {
+  type        = number
+  description = "The frequency in seconds with which the readiness probe is executed"
+  default     = 5
+}
+
+variable "readiness_failure_threshold" {
+  type        = number
+  description = "The number of times the probe is allowed to fail consecutively before the container is considered to be not ready"
+  default     = 3
+}
+
 variable "service_port_type" {
   type        = string
   description = "Service port type"

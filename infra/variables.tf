@@ -16,18 +16,6 @@ variable "cluster_ca_certificate_path" {
   default = "/root/.minikube/ca.crt"
 }
 
-variable "backend_organization" {
-  type = string
-  description = "Name of the Hashicorp organization"
-  default = "hedgehog_test_organization"
-}
-
-variable "backend_workspaces" {
-  type = string
-  description = "Name of the Hashicorp workspace"
-  default = "hedgehog_test_workspace"
-}
-
 variable "kubernetes_host" {
   type = string
   description = "Kubernetes host address"
