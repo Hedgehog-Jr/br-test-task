@@ -64,6 +64,49 @@ variable "readiness_failure_threshold" {
   default     = 3
 }
 
+variable "readiness_probe_path" {
+  type        = string
+  description = "HTTP get path for readiness probe execution"
+  default     = "/ready"
+}
+
+variable "liveness_probe_path" {
+  type        = string
+  description = "HTTP get path for liveness probe execution"
+  default     = "/health"
+}
+
+variable "service_namespace" {
+  type        = string
+  description = "Service namespace"
+  default     = "default"
+}
+
+variable "cpu_requests" {
+  type        = string
+  description = "The amount of CPU to request for the app container"
+  default     = "250m"
+}
+
+variable "memory_requests" {
+  description = "The amount of memory to request for the app container"
+  type        = string
+  default     = "128Mi"
+}
+
+variable "cpu_limits" {
+  description = "The CPU limit for the app container"
+  type        = string
+  default     = "500m"
+}
+
+variable "memory_limits" {
+  description = "The memory limit for the app container."
+  type        = string
+  default     = "256Mi"
+}
+
+
 variable "service_port_type" {
   type        = string
   description = "Service port type"
