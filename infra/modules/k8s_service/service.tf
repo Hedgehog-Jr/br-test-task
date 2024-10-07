@@ -1,6 +1,7 @@
 resource "kubernetes_deployment" "this" {
   metadata {
-    name = var.app_name
+    name      = var.app_name
+    namespace = var.service_namespace
   }
 
   spec {
@@ -33,13 +34,25 @@ resource "kubernetes_deployment" "this" {
           name  = var.app_name
           image = var.docker_image
 
+          resources {
+            requests = {
+              cpu    = var.cpu_requests
+              memory = var.memory_requests
+            }
+
+            limits = {
+              cpu    = var.cpu_limits
+              memory = var.memory_limits
+            }
+          }
+
           port {
             container_port = var.service_target_port
           }
 
           liveness_probe {
             http_get {
-              path = "/health"
+              path = var.liveness_probe_path
               port = var.service_target_port
             }
 
@@ -49,7 +62,7 @@ resource "kubernetes_deployment" "this" {
 
           readiness_probe {
             http_get {
-              path = "/ready"
+              path = var.readiness_probe_path
               port = var.service_target_port
             }
             initial_delay_seconds = var.readiness_probe_init_delay_sec
